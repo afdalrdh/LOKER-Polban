@@ -1,25 +1,7 @@
 <?php
-require 'config.php';
 require_once 'library.php';
-session_start();
 if (chkLogin()) {
-    header("Location: login.php");
-}
-
-if (isset($_POST['submit'])) {
-    $insertOneResult = $loker->insertOne([
-        'pemilik' => $_POST['pemilik'],
-        'type' => $_POST['type'],
-        'jenis_loker' => $_POST['jenis_loker'],
-        'judul_loker' => $_POST['judul_loker'],
-        'deskripsi_loker' => $_POST['deskripsi_loker'],
-        'requirement' => $_POST['requirement'],
-        'tgl_berakhir' => $_POST['tgl_berakhir'],
-        'tgl_pengajuan' => $_POST['tgl_pengajuan'],
-        'status' => 'false',
-    ]);
-    $_SESSION['success'] = "Data Mahasiswa Berhasil di tambahkan";
-    header("Location: index.php");
+    header("Location: home.php");
 }
 ?>
 
@@ -51,7 +33,6 @@ if (isset($_POST['submit'])) {
 </head>
 
 <body>
-
 
     <!-- Preloader Start -->
     <header>
@@ -95,86 +76,19 @@ if (isset($_POST['submit'])) {
         <!-- Header End -->
     </header>
 
-    <section class="featured-job-area feature-padding">
-        <div class="container">
-            <!-- Section Tittle -->
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="section-tittle text-center">
-                        <span>Loker Polban</span>
-                        <h2>Membuat Loker</h2>
-                    </div>
-                </div>
+    <div class="container">
+        <form class="form-horizontal" method="post" action="login_action.php">
+            <div class="form-group">
+                <label class="sr-only" for="exampleInputEmail3">Email address</label>
+                <input type="email" class="form-control" id="exampleInputEmail3" name="email" placeholder="Email" required>
             </div>
-            <div class="row justify-content-center">
-                <div class="col-xl-10">
-                    <!-- single-job-content -->
-                    <div class="row">
-                        <div class="col-lg-12 col-md-12">
-                            <form method="POST">
-                                <?php
-                                $User = $user->find();
-                                foreach ($User as $usr) {
-                                ?>
-                                    <div class="mt-10">
-                                        <label>Pemilik</label>
-                                        <input type="text" name="pemilik" data="<?php echo $usr->nama ?>" placeholder="Pemilik Lowongan Pekerjaan" required class="single-input">
-                                    </div>
-                                    <div class="mt-10">
-                                        <label>Tipe</label>
-                                        <input type="text" name="type" data="<?php echo $usr->type ?>" placeholder="Tipe Lowongan Pekerjaan (Dosen/Mahasiswa)" required class="single-input">
-                                    </div>
-                                <?php } ?>
-                                <div class="mt-10">
-                                    <label>Jenis Loker</label>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="jenis_loker" id="kerja" checked>
-                                        <label>Pekerjaan</label>
-                                    </div>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="jenis_loker" id="pkm">
-                                        <label>PKM</label>
-                                    </div>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="jenis_loker" id="pmw">
-                                        <label>PMW</label>
-                                    </div>
-                                </div>
-                                <!-- <div class="mt-10">
-                                        <label>Email</label>
-                                        <input type="email" name="email" placeholder="Email Polban" required class="single-input">
-                                    </div> -->
-                                <div class="mt-10">
-                                    <label>Judul Loker</label>
-                                    <input type="text" name="judul_loker" placeholder="Judul Lowongan Pekerjaan yang akan ditampilkan pada website" required class="single-input">
-                                </div>
-                                <div class="mt-10">
-                                    <label>Desripsi Loker</label>
-                                    <textarea class="single-textarea" name="deskripsi_loker" placeholder="Deskripsi Lowongan Pekerjaan yang akan ditampilkan pada website" required></textarea>
-                                </div>
-                                <div class="mt-10">
-                                    <label>Requirement</label>
-                                    <input type="text" name="requirement" placeholder="Kebutuhan/kriteria yang dibutuhkan untuk calon pelamar" required class="single-input">
-                                </div>
-                                <div class="mt-10">
-                                    <label>Tanggal Mengajukan</label><br>
-                                    <input type="date" id="tgl_mengajukan" name="trip-start" min="2021-01-01" max="2024-12-31">
-                                </div>
-                                <div class="mt-10">
-                                    <label>Tanggal Berakhir</label><br>
-                                    <input type="date" id="tgl_berakhir" name="trip-start" min="2021-01-01" max="2024-12-31">
-                                </div>
-                                <div class="mt-10 text-center">
-                                    <button type="submit" name="submit">Buat Loker</button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
+            <div class="form-group">
+                <label class="sr-only" for="exampleInputPassword3">Password</label>
+                <input type="password" class="form-control" id="exampleInputPassword3" name="pass" placeholder="Password" required>
             </div>
-        </div>
-    </section>
-
+            <button type="submit" name="login" class="btn btn-default">Sign in</button>
+        </form>
+    </div>
 
     <footer>
         <!-- Footer Start-->

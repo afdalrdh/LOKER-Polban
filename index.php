@@ -1,3 +1,16 @@
+<?php
+require_once 'library.php';
+
+if (isset($_POST['logout'])) {
+
+    $var = removeall();
+    if ($var) {
+        header("Location:index.php");
+    } else {
+        echo "Error!";
+    }
+}
+?>
 <!doctype html>
 <html class="no-js" lang="zxx">
 
@@ -64,7 +77,11 @@
                                 </div>
                                 <!-- Header-btn -->
                                 <div class="header-btn d-none f-right d-lg-block">
-                                    <a href="#" class="btn head-btn2">Logout</a>
+                                    <a href="register.php" class="btn head-btn2">Register</a>
+                                    <a href="login.php" class="btn head-btn2">Login</a>
+                                    <form method="post" action="">
+                                        <input type="submit" name="logout" value="Logout!">
+                                    </form>
                                 </div>
                             </div>
                         </div>
