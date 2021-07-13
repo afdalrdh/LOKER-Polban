@@ -1,10 +1,10 @@
 <?php
 require 'config.php';
 require_once 'library.php';
-// session_start();
-// if (!chkLogin()) {
-//     header("Location: index.php");
-// }
+session_start();
+if (!chkLogin()) {
+    header("Location: index.php");
+}
 
 if (isset($_POST['submit'])) {
     $insertOneResult = $loker->insertOne([
@@ -15,11 +15,11 @@ if (isset($_POST['submit'])) {
         'deskripsi_loker' => $_POST['deskripsi_loker'],
         'requirement' => $_POST['requirement'],
         'tgl_berakhir' => $_POST['tgl_berakhir'],
-        'tgl_pengajuan' => $_POST['tgl_mengajukan'],
+        'tgl_pengajuan' => $_POST['tgl_pengajuan'],
         'status' => 'false',
     ]);
     $_SESSION['success'] = "Data Mahasiswa Berhasil di tambahkan";
-    header("Location: beranda.php");
+    header("Location: home.php");
 }
 
 if (isset($_POST['logout'])) {
@@ -140,15 +140,15 @@ if (isset($_POST['logout'])) {
                                 <div class="mt-10">
                                     <label>Jenis Loker</label>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="jenis_loker" id="inputKerja" value="kerja" checked>
+                                        <input class="form-check-input" type="radio" name="jenis_loker" id="kerja" checked>
                                         <label>Pekerjaan</label>
                                     </div>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="jenis_loker" id="inputPkm" value="pkm">
+                                        <input class="form-check-input" type="radio" name="jenis_loker" id="pkm">
                                         <label>PKM</label>
                                     </div>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="jenis_loker" id="inputPmw" value="pmw">
+                                        <input class="form-check-input" type="radio" name="jenis_loker" id="pmw">
                                         <label>PMW</label>
                                     </div>
                                 </div>
@@ -170,14 +170,14 @@ if (isset($_POST['logout'])) {
                                 </div>
                                 <div class="mt-10">
                                     <label>Tanggal Mengajukan</label><br>
-                                    <input type="date" id="inputDate" name="tgl_mengajukan" class="form-control" value="<?php echo date('Y-m-d'); ?>" readonly>
+                                    <input type="date" id="tgl_mengajukan" name="trip-start" min="2021-01-01" max="2024-12-31">
                                 </div>
                                 <div class="mt-10">
                                     <label>Tanggal Berakhir</label><br>
-                                    <input type="date" id="inputDate" name="tgl_berakhir" class="form-control" min="<?php echo date('Y-m-d'); ?>" required>
+                                    <input type="date" id="tgl_berakhir" name="trip-start" min="2021-01-01" max="2024-12-31">
                                 </div>
                                 <div class="mt-10 text-center">
-                                    <button type="submit" name="submit" class="genric-btn primary e-large">Buat Loker</button>
+                                    <button type="submit" name="submit">Buat Loker</button>
                                 </div>
                             </form>
                         </div>

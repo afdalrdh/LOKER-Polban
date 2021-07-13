@@ -1,19 +1,19 @@
 <?php
 require_once 'library.php';
-// session_start();
-// if (!chkLogin()) {
-//     header("Location: index.php");
-// }
+session_start();
+if (!chkLogin()) {
+    header("Location: index.php");
+}
 
-// if (isset($_POST['logout'])) {
+if (isset($_POST['logout'])) {
 
-//     $var = removeall();
-//     if ($var) {
-//         header("Location:index.php");
-//     } else {
-//         echo "Error!";
-//     }
-// }
+    $var = removeall();
+    if ($var) {
+        header("Location:index.php");
+    } else {
+        echo "Error!";
+    }
+}
 ?>
 
 <!doctype html>

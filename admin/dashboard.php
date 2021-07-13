@@ -1,3 +1,21 @@
+<?php
+require 'D:\Software\xampp\htdocs\LOKER-Polban\library.php';
+session_start();
+if (!chkLogin()) {
+    header("Location: D:\Software\xampp\htdocs\LOKER-Polban\index.php");
+}
+
+if (isset($_POST['logout'])) {
+
+    $var = removeall();
+    if ($var) {
+        header("Location:index.php");
+    } else {
+        echo "Error!";
+    }
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -41,7 +59,7 @@
             <!-- Navigation -->
             <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
                 <div class="navbar-header">
-                    <a class="navbar-brand" href="index.html">Startmin</a>
+                    <a class="navbar-brand" href="#">Startmin</a>
                 </div>
 
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -134,7 +152,7 @@
                                 <a href="#" class="active"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
                             </li>
                             <li>
-                                <a href="tables.html"><i class="fa fa-table fa-fw"></i> Tables</a>
+                                <a href="data_akun.php"><i class="fa fa-table fa-fw"></i> Data Akun</a>
                             </li>
                         </ul>
                     </div>

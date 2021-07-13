@@ -36,7 +36,8 @@
         $temp  = $_POST['pass'];
         $options = array('cost' => 10);
         $pass = password_hash($temp, PASSWORD_BCRYPT, $options);
-    
+        $status = false;
+
         $arrays = array(
             
             "nama"          => $name,
@@ -48,7 +49,8 @@
             "alamat"        => $alamat,
             "no_tlp"        => $no_telp,
             "email"         => $email,
-            "password"      => $pass
+            "password"      => $pass,
+            "status"        => $status
         
         );
         
