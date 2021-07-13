@@ -1,10 +1,10 @@
 <?php
 require 'config.php';
 require_once 'library.php';
-session_start();
-if (!chkLogin()) {
-    header("Location: index.php");
-}
+// session_start();
+// if (!chkLogin()) {
+//     header("Location: index.php");
+// }
 
 if (isset($_POST['submit'])) {
     $insertOneResult = $loker->insertOne([
@@ -15,11 +15,11 @@ if (isset($_POST['submit'])) {
         'deskripsi_loker' => $_POST['deskripsi_loker'],
         'requirement' => $_POST['requirement'],
         'tgl_berakhir' => $_POST['tgl_berakhir'],
-        'tgl_pengajuan' => $_POST['tgl_pengajuan'],
+        'tgl_pengajuan' => $_POST['tgl_mengajukan'],
         'status' => 'false',
     ]);
     $_SESSION['success'] = "Data Mahasiswa Berhasil di tambahkan";
-    header("Location: home.php");
+    header("Location: beranda.php");
 }
 
 if (isset($_POST['logout'])) {
@@ -91,7 +91,7 @@ if (isset($_POST['logout'])) {
                                 <!-- Header-btn -->
                                 <div class="header-btn d-none f-right d-lg-block">
                                     <form method="post" action="">
-                                        <input type="submit" name="logout" value="Logout" class="btn head-btn2">
+                                        <input type="submit" name="logout" value="Logout" class="btn head-btn1">
                                     </form>
                                 </div>
                             </div>
@@ -140,15 +140,15 @@ if (isset($_POST['logout'])) {
                                 <div class="mt-10">
                                     <label>Jenis Loker</label>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="jenis_loker" id="kerja" checked>
+                                        <input class="form-check-input" type="radio" name="jenis_loker" id="inputKerja" value="kerja" checked>
                                         <label>Pekerjaan</label>
                                     </div>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="jenis_loker" id="pkm">
+                                        <input class="form-check-input" type="radio" name="jenis_loker" id="inputPkm" value="pkm">
                                         <label>PKM</label>
                                     </div>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="jenis_loker" id="pmw">
+                                        <input class="form-check-input" type="radio" name="jenis_loker" id="inputPmw" value="pmw">
                                         <label>PMW</label>
                                     </div>
                                 </div>
@@ -170,14 +170,14 @@ if (isset($_POST['logout'])) {
                                 </div>
                                 <div class="mt-10">
                                     <label>Tanggal Mengajukan</label><br>
-                                    <input type="date" id="tgl_mengajukan" name="trip-start" min="2021-01-01" max="2024-12-31">
+                                    <input type="date" id="inputDate" name="tgl_mengajukan" class="form-control" value="<?php echo date('Y-m-d'); ?>" readonly>
                                 </div>
                                 <div class="mt-10">
                                     <label>Tanggal Berakhir</label><br>
-                                    <input type="date" id="tgl_berakhir" name="trip-start" min="2021-01-01" max="2024-12-31">
+                                    <input type="date" id="inputDate" name="tgl_berakhir" class="form-control" min="<?php echo date('Y-m-d'); ?>" required>
                                 </div>
                                 <div class="mt-10 text-center">
-                                    <button type="submit" name="submit">Buat Loker</button>
+                                    <button type="submit" name="submit" class="genric-btn primary e-large">Buat Loker</button>
                                 </div>
                             </form>
                         </div>
