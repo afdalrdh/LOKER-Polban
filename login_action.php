@@ -1,10 +1,10 @@
 <?php require_once 'config.php'; ?>
 <?php require_once 'library.php'; ?>
 <?php
-    
-    // if(chkLogin()){
-    //     header("Location: index.php");
-    // }
+    session_start();
+    if(chkLogin()){
+        header("Location: beranda.php");
+    }
 ?>
 <?php
 
@@ -32,7 +32,7 @@
                     
                     if($var){
                         
-                    header("Location: index.php");
+                    header("Location: beranda.php");
                     }
                     else{
                         echo "Some error";

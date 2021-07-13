@@ -1,7 +1,7 @@
 <?php
 require_once 'library.php';
 if (chkLogin()) {
-  header("Location: home.php");
+  header("Location: beranda.php");
 }
 ?>
 
@@ -44,7 +44,7 @@ if (chkLogin()) {
             <div class="col-lg-3 col-md-2">
               <!-- Logo -->
               <div class="logo">
-                <a href="index.php"><img src="assets/img/logo.png" alt=""></a>
+                <a href="beranda.php"><img src="assets/img/logo.png" alt=""></a>
               </div>
             </div>
             <div class="col-lg-9 col-md-9">
@@ -53,16 +53,13 @@ if (chkLogin()) {
                 <div class="main-menu">
                   <nav class="d-none d-lg-block">
                     <ul id="navigation">
-                      <li><a href="#">Beranda</a></li>
+                      <li><a href="beranda.php">Beranda</a></li>
                       <li><a href="buat_loker.php">Buat Loker</a></li>
                       <li><a href="about.php">Tentang Kami</a></li>
                     </ul>
                   </nav>
                 </div>
                 <!-- Header-btn -->
-                <div class="header-btn d-none f-right d-lg-block">
-                  <a href="#" class="btn head-btn2">Logout</a>
-                </div>
               </div>
             </div>
             <!-- Mobile Menu -->
@@ -81,6 +78,72 @@ if (chkLogin()) {
       <label for="inputFname3" class="col-sm-2 control-label">Full Name</label>
       <div class="col-sm-10">
         <input type="text" class="form-control" id="inputFname3" name="name" placeholder="Full Name" required>
+      </div>
+    </div>
+
+    <div class="col-lg-12 col-md-12">
+      <label>Pekerjaan</label>
+      <div class="form-check">
+          <input class="form-check-input" type="radio" name="pekerjaan" id="inputDosen" value="Dosen" checked>
+          <label>Dosen</label>
+      </div>
+      <div class="form-check">
+          <input class="form-check-input" type="radio" name="pekerjaan" id="inputMahasiswa" value="Mahasiswa">
+          <label>Mahasiswa</label>
+      </div>
+      <div class="form-check">
+          <input class="form-check-input" type="radio" name="pekerjaan" id="inputLain" value="Lain-lain">
+          <label>Lain-lain</label>
+      </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="inputNInduk3" class="col-sm-2 control-label">Nomor Induk</label>
+      <div class="col-sm-10">
+        <input type="number" class="form-control" id="inputNInduk3" name="nomor_induk" placeholder="NIM/NIP" required>
+      </div>
+    </div>
+
+    <form class="form-horizontal" action="register_action.php" method="post">
+    <div class="form-group">
+      <label for="inputProdi" class="col-sm-2 control-label">Program Studi</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" id="inputProdi" name="prodi" placeholder="Contoh: D4 - Teknik Informatika" required>
+      </div>
+    </div>
+
+    <div class="col-lg-12 col-md-12">
+      <label>Jenis Kelamin</label>
+      <div class="form-check">
+          <input class="form-check-input" type="radio" name="gender" id="inputLaki" value="Laki-laki" checked>
+          <label>Laki-laki</label>
+      </div>
+      <div class="form-check">
+          <input class="form-check-input" type="radio" name="gender" id="inputPerempuan" value="Perempuan">
+          <label>Perempuan</label>
+      </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="inputDate" class="col-sm-2 control-label">Tanggal Lahir</label>
+      <div class="col-sm-10">
+        <input type="date" class="form-control" id="inputDate" name="tgl_lahir" required>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="inputAlamat" class="col-sm-2 control-label">Alamat</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" id="inputAlamat" name="alamat" placeholder="Alamat" required>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="inputNotelp" class="col-sm-2 control-label">Nomor Telepon</label>
+      <div class="col-sm-10">
+        <input type="number" class="form-control" id="inputNotelp" name="no_telp" placeholder="Nomor Telepon" required>
       </div>
     </div>
 
@@ -191,7 +254,7 @@ if (chkLogin()) {
         <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6">
           <!-- logo -->
           <div class="footer-logo mb-20">
-            <a href="index.html"><img src="assets/img/logo/logo2_footer.png" alt=""></a>
+            <a href="beranda.html"><img src="assets/img/logo/logo2_footer.png" alt=""></a>
           </div>
         </div>
         <div class="col-xl-3 col-lg-3 col-md-4 col-sm-5">

@@ -2,8 +2,8 @@
 require 'config.php';
 require_once 'library.php';
 session_start();
-if (chkLogin()) {
-    header("Location: login.php");
+if (!chkLogin()) {
+    header("Location: index.php");
 }
 
 if (isset($_POST['submit'])) {
@@ -19,7 +19,17 @@ if (isset($_POST['submit'])) {
         'status' => 'false',
     ]);
     $_SESSION['success'] = "Data Mahasiswa Berhasil di tambahkan";
-    header("Location: index.php");
+    header("Location: home.php");
+}
+
+if (isset($_POST['logout'])) {
+
+    $var = removeall();
+    if ($var) {
+        header("Location:index.php");
+    } else {
+        echo "Error!";
+    }
 }
 ?>
 
@@ -63,7 +73,7 @@ if (isset($_POST['submit'])) {
                         <div class="col-lg-3 col-md-2">
                             <!-- Logo -->
                             <div class="logo">
-                                <a href="index.php"><img src="assets/img/logo.png" alt=""></a>
+                                <a href="beranda.php"><img src="assets/img/logo.png" alt=""></a>
                             </div>
                         </div>
                         <div class="col-lg-9 col-md-9">
@@ -72,7 +82,7 @@ if (isset($_POST['submit'])) {
                                 <div class="main-menu">
                                     <nav class="d-none d-lg-block">
                                         <ul id="navigation">
-                                            <li><a href="#">Beranda</a></li>
+                                            <li><a href="beranda.php">Beranda</a></li>
                                             <li><a href="buat_loker.php">Buat Loker</a></li>
                                             <li><a href="about.php">Tentang Kami</a></li>
                                         </ul>
@@ -80,7 +90,9 @@ if (isset($_POST['submit'])) {
                                 </div>
                                 <!-- Header-btn -->
                                 <div class="header-btn d-none f-right d-lg-block">
-                                    <a href="#" class="btn head-btn2">Logout</a>
+                                    <form method="post" action="">
+                                        <input type="submit" name="logout" value="Logout" class="btn head-btn2">
+                                    </form>
                                 </div>
                             </div>
                         </div>
@@ -252,7 +264,7 @@ if (isset($_POST['submit'])) {
                     <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6">
                         <!-- logo -->
                         <div class="footer-logo mb-20">
-                            <a href="index.html"><img src="assets/img/logo/logo2_footer.png" alt=""></a>
+                            <a href="beranda.html"><img src="assets/img/logo/logo2_footer.png" alt=""></a>
                         </div>
                     </div>
                     <div class="col-xl-3 col-lg-3 col-md-4 col-sm-5">

@@ -28,15 +28,20 @@
     }
     function chkLogin(){
         
-        //var_dump($_SESSION);
-        $_SESSION["userLoggedIn"] = isset ($array['index_array']) ? $array['index_array']:'';
-        if($_SESSION["userLoggedIn"] == 1){
+        // if($_SESSION["userLoggedIn"] == 1){
+        //     return true;
+        // }
+        // else{
+        //     return false;
+        // }
+        
+        if(isset($_SESSION["userLoggedIn"])){
             return true;
-        }
-        else{
+        }else{
             return false;
         }
     }
+
     function removeall(){
         unset($_SESSION["userLoggedIn"]);
         unset($_SESSION["uname"]);
