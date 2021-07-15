@@ -173,17 +173,16 @@ session_start();
                                 <table class="table">
                                     <thead class="thead-dark">
                                         <tr>
-                                            <th scope="col">Nomor Induk</th>
+                                            <th scope="col">Pemilik</th>
+                                            <th scope="col">Judul</th>
+                                            <th scope="col">Jenis</th>
                                             <th scope="col">Tipe</th>
-                                            <th scope="col">Email</th>
-                                            <th scope="col">Nama</th>
-                                            <th scope="col">Program Studi</th>
                                             <th scope="col">Status</th>
                                         </tr>
                                     </thead>
                                     <?php
                                     require ($_SERVER['DOCUMENT_ROOT'].'/loker-Polban/config.php');
-                                    $loker = $collection->find();
+                                    $loker = $loker->find();
                                     foreach ($loker as $lkr) {
                                         if($lkr->status==false){
                                             $lkr->status = "Pending";
@@ -191,11 +190,10 @@ session_start();
                                             $lkr->status = "Disetujui";
                                         }
                                         echo "<tr>";
-                                        echo "<th scope='row'>" . $lkr->jenis_loker . "</th>";
+                                        echo "<th scope='row'>" . $lkr->pemilik . "</th>";
                                         echo "<td>" . $lkr->judul_loker . "</td>";
+                                        echo "<td>" . $lkr->jenis_loker . "</td>";
                                         echo "<td>" . $lkr->type . "</td>";
-                                        echo "<td>" . $lkr->pemilik . "</td>";
-                                        echo "<td>" . $lkr->deskripsi_loker . "</td>";
                                         echo "<td>" . $lkr->status . "</td>";
                                         echo "<td>";
                                         echo "<a href='setujui_loker.php?id=" . $lkr->_id . "'class='btn btn-primary'>SETUJUI</a>";

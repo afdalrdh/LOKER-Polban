@@ -1,15 +1,15 @@
 <?php session_start();
    require($_SERVER['DOCUMENT_ROOT'] . '/loker-Polban/config.php');
    if (isset($_GET['id'])) {
-      $USR = $user->findOne(['_id' => new MongoDB\BSON\ObjectID($_GET['id'])]);
+      $LKR = $loker->findOne(['_id' => new MongoDB\BSON\ObjectID($_GET['id'])]);
    }
    if(isset($_POST['submit'])){
-      $user->updateOne(
+      $loker->updateOne(
           ['_id' => new MongoDB\BSON\ObjectID($_GET['id'])],
           ['$set' => ['status' => true,]]
       );
-      $_SESSION['success'] = "Akun berhasil disetujui";
-      header("Location: data_akun.php");
+      $_SESSION['success'] = "Loker berhasil disetujui";
+      header("Location: data_loker.php");
    }
 ?>
 <!DOCTYPE html>
@@ -21,10 +21,10 @@
    <body>
       <div class="container">
          <br>
-         <CENTER><h1>Setujui Akun</h1></CENTER>
+         <CENTER><h1>Setujui Loker</h1></CENTER>
          <form method="POST">
             <div class="form-group">
-               <strong>Yakin setujui akun?</strong>
+               <strong>Yakin setujui loker?</strong>
                <br>
                <button type="submit" name="submit" class="btn btn-success">Ya</button>
                <a href="data_akun.php" class="btn btn-primary">Kembali</a>

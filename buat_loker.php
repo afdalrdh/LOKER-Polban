@@ -7,7 +7,6 @@ if (!chkLogin()) {
 }
 
 
-
 if (isset($_POST['submit'])) {
     if ($_POST['type'] != "Mahasiswa" || $_POST['type'] != "Dosen") {
         $type = "Mahasiswa & Dosen";
@@ -29,8 +28,25 @@ if (isset($_POST['submit'])) {
         // 'requirement' => $_POST['requirement'],
         'tgl_berakhir' => $_POST['tgl_berakhir'],
         'tgl_pengajuan' => $_POST['tgl_mengajukan'],
-        'status' => 'false',
+        'status' => false,
     ]);
+//     $array = array(
+//     "pemilik"           => $_POST['pemilik'],
+//     "type"              => $type,
+//     "jenis_loker"       => $_POST['jenis_loker'],
+//     "judul_loker"       => $_POST['judul_loker'],
+//     "deskirpsi_loker"   => $_POST['deskripsi_loker'],
+//     "requirement"       => array(
+//         'jurusan'   => $_POST['jurusan'],
+//         'keahlian'  => $_POST['keahlian'],
+//         'pengalaman'=> $_POST['pengalaman']
+//     ),
+//     // 'requirement' => $_POST['requirement'],
+//     "tgl_berakhir"      => $_POST['tgl_berakhir'],
+//     "tgl_pengajuan"     => $_POST['tgl_mengajukan'],
+//     "status"            => false
+// );
+// $loker->insertOne($array);
     $_SESSION['success'] = "Data Mahasiswa Berhasil di tambahkan";
     header("Location: beranda.php");
 }
@@ -140,12 +156,13 @@ if (isset($_POST['logout'])) {
                                 <?php
                                 $email = $_SESSION["email"];
                                 if (isset($email)) {
-                                    $usr = $user->findOne(['Email Address' => $email]);
+                                    $usr = $user->findOne(['email' => $email]);
                                 }
                                 ?>
                                 <div class="mt-10">
                                     <label>Pemilik</label>
-                                    <input type="text" name="pemilik" value="<?php echo "$usr->nama" ?>" placeholder="Pemilik Lowongan Pekerjaan" required class="single-input" readonly>
+                                    <div class="huge">
+                                    <input type="text" name="pemilik" value="<?php echo $_SESSION["uname"] ?>" placeholder="Pemilik Lowongan Pekerjaan" required class="single-input" readonly>
                                 </div>
                                 <div class="mt-10">
                                     <label>Tipe</label>

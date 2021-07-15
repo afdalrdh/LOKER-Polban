@@ -183,7 +183,7 @@ session_start();
                                     </thead>
                                     <?php
                                     require ($_SERVER['DOCUMENT_ROOT'].'/loker-Polban/config.php');
-                                    $user = $collection->find();
+                                    $user = $user->find();
                                     foreach ($user as $usr) {
                                         if($usr->status==false){
                                             $usr->status = "Pending";

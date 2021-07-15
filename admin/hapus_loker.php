@@ -1,13 +1,13 @@
 <?php session_start();
 require($_SERVER['DOCUMENT_ROOT'] . '/loker-Polban/config.php');
 if (isset($_GET['id'])) {
-    $usr = $user->findOne(['_id' => new MongoDB\BSON\ObjectID($_GET['id'])]);
+    $LKR = $loker->findOne(['_id' => new MongoDB\BSON\ObjectID($_GET['id'])]);
 }
 if (isset($_POST['submit'])) {
     require($_SERVER['DOCUMENT_ROOT'] . '/loker-Polban/config.php');
-    $user->deleteOne(['_id' => new MongoDB\BSON\ObjectID($_GET['id'])]);
+    $loker->deleteOne(['_id' => new MongoDB\BSON\ObjectID($_GET['id'])]);
     $_SESSION['success'] = "Akun Berhasil dihapus";
-    header("Location: data_akun.php");
+    header("Location: data_loker.php");
 }
 ?>
 

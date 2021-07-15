@@ -10,20 +10,22 @@
 
     if(isset($_POST['login'])){
 //        print_r($_POST);
-      
-        
-        $email = $_POST['email'];
-        $upass = $_POST['pass'];
-        $criteria = array("Email Address"=> $email);
-        $query = $collection->findOne($criteria);
+    $email = $_POST['email'];
+    $upass = $_POST['pass'];
+    if($email == "admin@admin" && $upass == "admin"){
+        header("Location: admin/dashboard.php");
+    }else{
+
+        $criteria = array("email"=> $email);
+        $query = $user->findOne($criteria);
         //var_dump($query);
         if(empty($query)){
             echo "Email ID is not registered.";
-            echo "Either <a href='register'>Register</a> with the new Email ID or <a href='login.php'>Login</a> with an already registered ID";
+            echo "Either <a href='register.php'>Register</a> with the new Email ID or <a href='index.php'>Login</a> with an already registered ID";
         }
         else{
             
-                $pass = $query["Password"];
+                $pass = $query["password"];
                 if(password_verify($upass,$pass)){
                     $var = setsession($email);
 //                    echo"<pre>";   
@@ -41,13 +43,12 @@
                 else{
                     echo "You have entered a wrong password";
                     echo "<br>";
-                    echo "Either <a href='register'>Register</a> with the new Email ID or <a href='login.php'>Login</a> with an already registered ID";
+                    echo "Either <a href='register.php'>Register</a> with the new Email ID or <a href='index.php'>Login</a> with an already registered ID";
                 }
                 
             
         
         }
     }
-    
-
+    }
 ?>

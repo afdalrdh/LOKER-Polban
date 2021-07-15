@@ -1,14 +1,14 @@
 <?php
     
     function register($document){
-        global $collection;
-        $collection->insertOne($document);
+        global $user;
+        $user->insertOne($document);
         return true;
     }
 
     function chkemail($email){
-        global $collection;
-        $temp = $collection->findOne(array('Email Address'=> $email));
+        global $user;
+        $temp = $user->findOne(array('email'=> $email));
         if(empty($temp)){
         return true;
         }
@@ -19,9 +19,9 @@
     function setsession($email){
      
         $_SESSION["userLoggedIn"] = 1;
-        global $collection;
-        $temp = $collection->findOne(array('Email Address'=> $email));
-        $_SESSION["uname"] = $temp["Full Name"];
+        global $user;
+        $temp = $user->findOne(array('email'=> $email));
+        $_SESSION["uname"] = $temp->nama;
         $_SESSION["email"] = $email;
         return true;
         
