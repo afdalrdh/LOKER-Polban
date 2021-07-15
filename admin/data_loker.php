@@ -141,10 +141,10 @@ session_start();
                             <a href="dashboard.php"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-table fa-fw"></i> Data Akun</a>
+                            <a href="data_akun.php"><i class="fa fa-table fa-fw"></i> Data Akun</a>
                         </li>
                         <li>
-                            <a href="data_loker.php"><i class="fa fa-table fa-fw"></i> Data Loker</a>
+                            <a href="#"><i class="fa fa-table fa-fw"></i> Data Loker</a>
                         </li>
                     </ul>
                 </div>
@@ -156,7 +156,7 @@ session_start();
         <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">Data Akun</h1>
+                    <h1 class="page-header">Data Loker</h1>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
@@ -165,7 +165,7 @@ session_start();
                 <div class="col-lg-12">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            Data Akun
+                            Data Loker
                         </div>
                         <!-- /.panel-heading -->
                         <div class="panel-body">
@@ -183,23 +183,23 @@ session_start();
                                     </thead>
                                     <?php
                                     require ($_SERVER['DOCUMENT_ROOT'].'/loker-Polban/config.php');
-                                    $user = $collection->find();
-                                    foreach ($user as $usr) {
-                                        if($usr->status==false){
-                                            $usr->status = "Pending";
+                                    $loker = $collection->find();
+                                    foreach ($loker as $lkr) {
+                                        if($lkr->status==false){
+                                            $lkr->status = "Pending";
                                         }else{
-                                            $usr->status = "Disetujui";
+                                            $lkr->status = "Disetujui";
                                         }
                                         echo "<tr>";
-                                        echo "<th scope='row'>" . $usr->nomor_induk . "</th>";
-                                        echo "<td>" . $usr->type . "</td>";
-                                        echo "<td>" . $usr->email . "</td>";
-                                        echo "<td>" . $usr->nama . "</td>";
-                                        echo "<td>" . $usr->prodi . "</td>";
-                                        echo "<td>" . $usr->status . "</td>";
+                                        echo "<th scope='row'>" . $lkr->jenis_loker . "</th>";
+                                        echo "<td>" . $lkr->judul_loker . "</td>";
+                                        echo "<td>" . $lkr->type . "</td>";
+                                        echo "<td>" . $lkr->pemilik . "</td>";
+                                        echo "<td>" . $lkr->deskripsi_loker . "</td>";
+                                        echo "<td>" . $lkr->status . "</td>";
                                         echo "<td>";
-                                        echo "<a href='setujui_akun.php?id=" . $usr->_id . "'class='btn btn-primary'>SETUJUI</a>";
-                                        echo "<a href='hapus_akun.php?id=" . $usr->_id . "'class='btn btn-danger'>HAPUS</a>";
+                                        echo "<a href='setujui_loker.php?id=" . $lkr->_id . "'class='btn btn-primary'>SETUJUI</a>";
+                                        echo "<a href='hapus_loker.php?id=" . $lkr->_id . "'class='btn btn-danger'>HAPUS</a>";
                                         echo "</td>";
                                         echo "</tr>";
                                     }

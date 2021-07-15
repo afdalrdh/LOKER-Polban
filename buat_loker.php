@@ -16,7 +16,7 @@ if (isset($_POST['submit'])) {
         'requirement' => $_POST['requirement'],
         'tgl_berakhir' => $_POST['tgl_berakhir'],
         'tgl_pengajuan' => $_POST['tgl_pengajuan'],
-        'status' => 'false',
+        'status' => false,
     ]);
     $_SESSION['success'] = "Data Mahasiswa Berhasil di tambahkan";
     header("Location: home.php");

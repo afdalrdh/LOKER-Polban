@@ -1,19 +1,16 @@
 <?php
 require 'D:\Software\xampp\htdocs\LOKER-Polban\library.php';
+require 'D:\Software\xampp\htdocs\LOKER-Polban\config.php';
 session_start();
 if (!chkLogin()) {
     header("Location: D:\Software\xampp\htdocs\LOKER-Polban\index.php");
 }
 
-if (isset($_POST['logout'])) {
+$jmlhAkun = $collection->find();
+$filter = array('status' => true);
+$jmlhVerified = $collection->count($filter);
+$jmlhUnVerify = $collection->count(array('status' => false));
 
-    $var = removeall();
-    if ($var) {
-        header("Location:index.php");
-    } else {
-        echo "Error!";
-    }
-}
 ?>
 
 <!DOCTYPE html>
@@ -25,7 +22,7 @@ if (isset($_POST['logout'])) {
         <meta name="description" content="">
         <meta name="author" content="">
 
-        <title>Startmin - Bootstrap Admin Theme</title>
+        <title>Admin Page</title>
 
         <!-- Bootstrap Core CSS -->
         <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -154,6 +151,9 @@ if (isset($_POST['logout'])) {
                             <li>
                                 <a href="data_akun.php"><i class="fa fa-table fa-fw"></i> Data Akun</a>
                             </li>
+                            <li>
+                                <a href="data_loker.php"><i class="fa fa-table fa-fw"></i> Data Loker</a>
+                            </li>
                         </ul>
                     </div>
                 </div>
@@ -169,15 +169,69 @@ if (isset($_POST['logout'])) {
                 <!-- /.row -->
                 <div class="row">
                     <div class="col-lg-3 col-md-6">
-                        <div class="panel panel-primary">
+                        <div class="panel panel-red">
                             <div class="panel-heading">
                                 <div class="row">
                                     <div class="col-xs-3">
-                                        <i class="fa fa-comments fa-5x"></i>
+                                        <i class="fa fa-user fa-5x"></i>
                                     </div>
                                     <div class="col-xs-9 text-right">
-                                        <div class="huge">26</div>
-                                        <div>New Comments!</div>
+                                        <div class="huge">
+                                            <?php                                        
+                                            echo "<td class='huge'>$jmlhUnVerify</td>"
+                                            ?>
+                                        </div>
+                                        <div>Akun belum diverifikasi</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <a href="data_akun.php">
+                                <div class="panel-footer">
+                                    <span class="pull-left">View Details</span>
+                                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+
+                                    <div class="clearfix"></div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <div class="panel panel-green">
+                            <div class="panel-heading">
+                                <div class="row">
+                                    <div class="col-xs-3">
+                                        <i class="fa fa-user fa-5x"></i>
+                                    </div>
+                                    <div class="col-xs-9 text-right">
+                                        <div class="huge">
+                                            <?php                                        
+                                            echo "<td class='huge'>$jmlhVerified</td>"
+                                            ?>
+                                        </div>
+                                        <div>Akun sudah diverifikasi</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <a href="data_akun.php">
+                                <div class="panel-footer">
+                                    <span class="pull-left">View Details</span>
+                                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+
+                                    <div class="clearfix"></div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <div class="panel panel-red">
+                            <div class="panel-heading">
+                                <div class="row">
+                                    <div class="col-xs-3">
+                                        <i class="fa fa-tasks fa-5x"></i>
+                                    </div>
+                                    <div class="col-xs-9 text-right">
+                                        <div class="huge">0</div>
+                                        <div>Loker belum diverifikasi</div>
                                     </div>
                                 </div>
                             </div>
@@ -199,54 +253,8 @@ if (isset($_POST['logout'])) {
                                         <i class="fa fa-tasks fa-5x"></i>
                                     </div>
                                     <div class="col-xs-9 text-right">
-                                        <div class="huge">12</div>
-                                        <div>New Tasks!</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <a href="#">
-                                <div class="panel-footer">
-                                    <span class="pull-left">View Details</span>
-                                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-
-                                    <div class="clearfix"></div>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6">
-                        <div class="panel panel-yellow">
-                            <div class="panel-heading">
-                                <div class="row">
-                                    <div class="col-xs-3">
-                                        <i class="fa fa-shopping-cart fa-5x"></i>
-                                    </div>
-                                    <div class="col-xs-9 text-right">
-                                        <div class="huge">124</div>
-                                        <div>New Orders!</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <a href="#">
-                                <div class="panel-footer">
-                                    <span class="pull-left">View Details</span>
-                                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-
-                                    <div class="clearfix"></div>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6">
-                        <div class="panel panel-red">
-                            <div class="panel-heading">
-                                <div class="row">
-                                    <div class="col-xs-3">
-                                        <i class="fa fa-support fa-5x"></i>
-                                    </div>
-                                    <div class="col-xs-9 text-right">
-                                        <div class="huge">13</div>
-                                        <div>Support Tickets!</div>
+                                        <div class="huge">0</div>
+                                        <div>Loker sudah diverifikasi</div>
                                     </div>
                                 </div>
                             </div>
