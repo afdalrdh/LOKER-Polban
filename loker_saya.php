@@ -1,49 +1,19 @@
 <?php
-require 'config.php';
 require_once 'library.php';
-session_start();
-if (!chkLogin()) {
-    header("Location: index.php");
-}
+// session_start();
+// if (!chkLogin()) {
+//     header("Location: index.php");
+// }
 
+// if (isset($_POST['logout'])) {
 
-
-if (isset($_POST['submit'])) {
-    if ($_POST['type'] != "Mahasiswa" || $_POST['type'] != "Dosen") {
-        $type = "Mahasiswa & Dosen";
-    } else {
-        $type =  $_POST['type'];
-    }
-
-    $insertOneResult = $loker->insertOne([
-        'pemilik' => $_POST['pemilik'],
-        'type' => $type,
-        'jenis_loker' => $_POST['jenis_loker'],
-        'judul_loker' => $_POST['judul_loker'],
-        'deskripsi_loker' => $_POST['deskripsi_loker'],
-        'requirement' => array(
-            'jurusan' => $_POST['jurusan'],
-            'keahlian' => $_POST['keahlian'],
-            'pengalaman' => $_POST['pengalaman']
-        ),
-        // 'requirement' => $_POST['requirement'],
-        'tgl_berakhir' => $_POST['tgl_berakhir'],
-        'tgl_pengajuan' => $_POST['tgl_mengajukan'],
-        'status' => 'false',
-    ]);
-    $_SESSION['success'] = "Data Mahasiswa Berhasil di tambahkan";
-    header("Location: beranda.php");
-}
-
-if (isset($_POST['logout'])) {
-
-    $var = removeall();
-    if ($var) {
-        header("Location:index.php");
-    } else {
-        echo "Error!";
-    }
-}
+//     $var = removeall();
+//     if ($var) {
+//         header("Location:index.php");
+//     } else {
+//         echo "Error!";
+//     }
+// }
 ?>
 
 <!doctype html>
@@ -61,8 +31,9 @@ if (isset($_POST['logout'])) {
     <!-- CSS here -->
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/owl.carousel.min.css">
-    <link rel="stylesheet" href="assets/css/slicknav.css">
     <link rel="stylesheet" href="assets/css/price_rangs.css">
+    <link rel="stylesheet" href="assets/css/flaticon.css">
+    <link rel="stylesheet" href="assets/css/slicknav.css">
     <link rel="stylesheet" href="assets/css/animate.min.css">
     <link rel="stylesheet" href="assets/css/magnific-popup.css">
     <link rel="stylesheet" href="assets/css/fontawesome-all.min.css">
@@ -70,12 +41,20 @@ if (isset($_POST['logout'])) {
     <link rel="stylesheet" href="assets/css/slick.css">
     <link rel="stylesheet" href="assets/css/nice-select.css">
     <link rel="stylesheet" href="assets/css/style.css">
-    <link rel="stylesheet" href="assets/css/responsive.css">
 </head>
 
 <body>
-
-
+    <!-- Preloader Start -->
+    <div id="preloader-active">
+        <div class="preloader d-flex align-items-center justify-content-center">
+            <div class="preloader-inner position-relative">
+                <div class="preloader-circle"></div>
+                <div class="preloader-img pere-text">
+                    <img src="assets/img/logo.png" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
     <!-- Preloader Start -->
     <header>
         <!-- Header Start -->
@@ -97,6 +76,7 @@ if (isset($_POST['logout'])) {
                                         <ul id="navigation">
                                             <li><a href="beranda.php">Beranda</a></li>
                                             <li><a href="buat_loker.php">Buat Loker</a></li>
+                                            <li><a href="#">Loker Saya</a></li>
                                             <li><a href="about.php">Tentang Kami</a></li>
                                         </ul>
                                     </nav>
@@ -119,109 +99,105 @@ if (isset($_POST['logout'])) {
         </div>
         <!-- Header End -->
     </header>
+    <main>
 
-    <section class="featured-job-area feature-padding">
-        <div class="container">
-            <!-- Section Tittle -->
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="section-tittle text-center">
-                        <span>Loker Polban</span>
-                        <h2>Membuat Loker</h2>
+        <!-- Job List Area Start -->
+        <div class="job-listing-area pt-50 pb-120">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="section-tittle text-center">
+                            <span>Loker Polban</span>
+                            <h2>Loker Saya</h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+
+                    <!-- Right content -->
+                    <div class="col-xl-12 col-lg-12 col-md-12">
+                        <!-- Featured_job_start -->
+                        <section class="featured-job-area">
+                            <div class="container">
+                                <!-- Count of Job list Start -->
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="count-job mb-35">
+                                            <span>39, 782 Jobs found</span>
+                                            <!-- Select job items start -->
+                                            <div class="select-job-items">
+                                                <span>Sort by</span>
+                                                <select name="select">
+                                                    <option value="">None</option>
+                                                    <option value="">job list</option>
+                                                    <option value="">job list</option>
+                                                    <option value="">job list</option>
+                                                </select>
+                                            </div>
+                                            <!--  Select job items End-->
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Count of Job list End -->
+                                <!-- single-job-content -->
+                                <?php
+                                require 'config.php';
+                                $Loker = $loker->find();
+                                foreach ($Loker as $lkr) {
+                                ?>
+                                    <div class="single-job-items mb-30">
+                                        <div class="job-items">
+                                            <div class="company-img">
+                                                <a href="#"><img src="assets/img/icon/job-list1.png" alt=""></a>
+                                            </div>
+                                            <div class="job-tittle job-tittle2">
+                                                <a href="#">
+                                                    <h4><?php echo "$lkr->judul_loker" ?></h4>
+                                                </a>
+                                                <ul>
+                                                    <li><?php echo "$lkr->jenis_loker" ?></li>
+                                                    <li><i class="fas fa-map-marker-alt"></i><?php echo "$lkr->pemilik" ?></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="items-link items-link2 f-right">
+                                            <a href='edit.php?id=" . $mhs->_id . "'>>Detail</a>
+                                            <span><?php echo "$lkr->tgl_berakhir" ?></span>
+                                        </div>
+                                    </div>
+                                <?php
+                                }
+                                ?>
+                            </div>
+                        </section>
+                        <!-- Featured_job_end -->
                     </div>
                 </div>
             </div>
-            <div class="row justify-content-center">
-                <div class="col-xl-10">
-                    <!-- single-job-content -->
-                    <div class="row">
-                        <div class="col-lg-12 col-md-12">
-                            <form method="POST">
-                                <?php
-                                $email = $_SESSION["email"];
-                                if (isset($email)) {
-                                    $usr = $user->findOne(['Email Address' => $email]);
-                                }
-                                ?>
-                                <div class="mt-10">
-                                    <label>Pemilik</label>
-                                    <input type="text" name="pemilik" value="<?php echo "$usr->nama" ?>" placeholder="Pemilik Lowongan Pekerjaan" required class="single-input" readonly>
-                                </div>
-                                <div class="mt-10">
-                                    <label>Tipe</label>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="Mahasiswa" id="flexCheckDefault">
-                                        <label class="form-check-label" for="flexCheckDefault">
-                                            Mahasiswa
-                                        </label>
-                                    </div>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="Dosen" id="flexCheckChecked">
-                                        <label class="form-check-label" for="flexCheckDefault">
-                                            Dosen
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="mt-10">
-                                    <label>Jenis Loker</label>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="jenis_loker" id="inputKerja" value="kerja" checked>
-                                        <label>Pekerjaan / Freelance</label>
-                                    </div>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="jenis_loker" id="inputPkm" value="pkm">
-                                        <label>Pekan Kreativitas Mahasiswa (PKM)</label>
-                                    </div>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="jenis_loker" id="inputPmw" value="pmw">
-                                        <label>Program Mahasiswa Wirausaha (PMW)</label>
-                                    </div>
-                                </div>
-                                <!-- <div class="mt-10">
-                                        <label>Email</label>
-                                        <input type="email" name="email" placeholder="Email Polban" required class="single-input">
-                                    </div> -->
-                                <div class="mt-10">
-                                    <label>Judul Loker</label>
-                                    <input type="text" name="judul_loker" placeholder="Judul Lowongan Pekerjaan yang akan ditampilkan pada website" required class="single-input">
-                                </div>
-                                <div class="mt-10">
-                                    <label>Desripsi Loker</label>
-                                    <textarea class="single-textarea" name="deskripsi_loker" placeholder="Deskripsi Lowongan Pekerjaan yang akan ditampilkan pada website" required></textarea>
-                                </div>
-                                <div class="mt-10">
-                                    <label>Tanggal Mengajukan</label><br>
-                                    <input type="date" id="inputDate" name="tgl_mengajukan" class="form-control" value="<?php echo date('Y-m-d'); ?>" readonly>
-                                </div>
-                                <div class="mt-10">
-                                    <label>Tanggal Berakhir</label><br>
-                                    <input type="date" id="inputDate" name="tgl_berakhir" class="form-control" min="<?php echo date('Y-m-d'); ?>" required>
-                                </div>
-                                <div class="mt-10">
-                                    <label style="font-weight:bold">Requirement</label><br>
-                                    <label>Jurusan</label>
-                                    <input type="text" name="jurusan" placeholder="Jurusan yang dibutuhkan" required class="single-input">
-                                </div>
-                                <div class="mt-10">
-                                    <label>Keahlian</label>
-                                    <input type="text" name="keahlian" placeholder="Keahlian yang dibutuhkan" required class="single-input">
-                                </div>
-                                <div class="mt-10">
-                                    <label>Pengalaman</label>
-                                    <input type="text" name="pengalaman" placeholder="Pengalaman yang dibutuhkan" required class="single-input">
-                                </div>
-                                <div class="mt-10 text-center">
-                                    <button type="submit" name="submit" class="genric-btn primary e-large">Buat Loker</button>
-                                </div>
-                            </form>
+        </div>
+        <!-- Job List Area End -->
+        <!--Pagination Start  -->
+        <div class="pagination-area pb-115 text-center">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-12">
+                        <div class="single-wrap d-flex justify-content-center">
+                            <nav aria-label="Page navigation example">
+                                <ul class="pagination justify-content-start">
+                                    <li class="page-item active"><a class="page-link" href="#">01</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">02</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">03</a></li>
+                                    <li class="page-item"><a class="page-link" href="#"><span class="ti-angle-right"></span></a></li>
+                                </ul>
+                            </nav>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
+        <!--Pagination End  -->
 
-
+    </main>
     <footer>
         <!-- Footer Start-->
         <div class="footer-area footer-bg footer-padding">
@@ -298,7 +274,7 @@ if (isset($_POST['logout'])) {
                     <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6">
                         <!-- logo -->
                         <div class="footer-logo mb-20">
-                            <a href="beranda.html"><img src="assets/img/logo/logo2_footer.png" alt=""></a>
+                            <a href="beranda.php"><img src="assets/img/logo-white.png" alt=""></a>
                         </div>
                     </div>
                     <div class="col-xl-3 col-lg-3 col-md-4 col-sm-5">
@@ -355,6 +331,7 @@ if (isset($_POST['logout'])) {
     </footer>
 
     <!-- JS here -->
+
     <!-- All JS Custom Plugins Link Here here -->
     <script src="./assets/js/vendor/modernizr-3.5.0.min.js"></script>
     <!-- Jquery, Popper, Bootstrap -->
@@ -364,11 +341,10 @@ if (isset($_POST['logout'])) {
     <!-- Jquery Mobile Menu -->
     <script src="./assets/js/jquery.slicknav.min.js"></script>
 
-    <!-- Jquery Slick , Owl-Carousel Plugins -->
+    <!-- Jquery Slick , Owl-Carousel Range -->
     <script src="./assets/js/owl.carousel.min.js"></script>
     <script src="./assets/js/slick.min.js"></script>
     <script src="./assets/js/price_rangs.js"></script>
-
     <!-- One Page, Animated-HeadLin -->
     <script src="./assets/js/wow.min.js"></script>
     <script src="./assets/js/animated.headline.js"></script>

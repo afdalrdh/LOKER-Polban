@@ -1,3 +1,35 @@
+<?php
+require_once 'library.php';
+session_start();
+if (!chkLogin()) {
+    header("Location: index.php");
+}
+
+if (isset($_POST['logout'])) {
+
+    $var = removeall();
+    if ($var) {
+        header("Location:index.php");
+    } else {
+        echo "Error!";
+    }
+}
+
+require 'config.php';
+if (isset($_GET['_id'])) {
+    $mhs = $collection->findOne(['_id' => new MongoDB\BSON\ObjectID($_GET['id'])]);
+}
+if (isset($_POST['submit'])) {
+    $collection->updateOne(
+        ['_id' => new MongoDB\BSON\ObjectID($_GET['id'])],
+        ['$set' => ['NIM' => $_POST['NIM'], 'Nama' => $_POST['Nama'], 'Prodi' => $_POST['Prodi'], 'Alamat' => $_POST['Alamat'],]]
+    );
+    $_SESSION['success'] = "Data Mahasiswa berhasil diubah";
+    header("Location: index.php");
+}
+
+?>
+
 <!doctype html>
 <html class="no-js" lang="zxx">
 
@@ -47,7 +79,7 @@
                         <div class="col-lg-3 col-md-2">
                             <!-- Logo -->
                             <div class="logo">
-                                <a href="beranda.php"><img src="assets/img/logo/logo.png" alt=""></a>
+                                <a href="beranda.php"><img src="assets/img/logo.png" alt=""></a>
                             </div>
                         </div>
                         <div class="col-lg-9 col-md-9">
@@ -56,25 +88,18 @@
                                 <div class="main-menu">
                                     <nav class="d-none d-lg-block">
                                         <ul id="navigation">
-                                            <li><a href="index.php">Home</a></li>
-                                            <li><a href="job_listing.php">Find a Jobs </a></li>
-                                            <li><a href="about.php">About</a></li>
-                                            <li><a href="#">Page</a>
-                                                <ul class="submenu">
-                                                    <li><a href="blog.html">Blog</a></li>
-                                                    <li><a href="single-blog.html">Blog Details</a></li>
-                                                    <li><a href="elements.html">Elements</a></li>
-                                                    <li><a href="job_details.html">job Details</a></li>
-                                                </ul>
-                                            </li>
-                                            <li><a href="contact.html">Contact</a></li>
+                                            <li><a href="beranda.php">Beranda</a></li>
+                                            <li><a href="buat_loker.php">Buat Loker</a></li>
+                                            <li><a href="loker_saya.php">Loker Saya</a></li>
+                                            <li><a href="about.php">Tentang Kami</a></li>
                                         </ul>
                                     </nav>
                                 </div>
                                 <!-- Header-btn -->
                                 <div class="header-btn d-none f-right d-lg-block">
-                                    <a href="#" class="btn head-btn1">Register</a>
-                                    <a href="#" class="btn head-btn2">Login</a>
+                                    <form method="post" action="">
+                                        <input type="submit" name="logout" value="Logout" class="btn head-btn1">
+                                    </form>
                                 </div>
                             </div>
                         </div>
@@ -90,46 +115,13 @@
     </header>
     <main>
 
-        <!-- Hero Area Start-->
-        <div class="slider-area ">
-            <div class="single-slider section-overly slider-height2 d-flex align-items-center" data-background="assets/img/hero/about.jpg">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-xl-12">
-                            <div class="hero-cap text-center">
-                                <h2>UI/UX Designer</h2>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Hero Area End -->
+
         <!-- job post company Start -->
         <div class="job-post-company pt-120 pb-120">
             <div class="container">
                 <div class="row justify-content-between">
                     <!-- Left Content -->
                     <div class="col-xl-7 col-lg-8">
-                        <!-- job single -->
-                        <div class="single-job-items mb-50">
-                            <div class="job-items">
-                                <div class="company-img company-img-details">
-                                    <a href="#"><img src="assets/img/icon/job-list1.png" alt=""></a>
-                                </div>
-                                <div class="job-tittle">
-                                    <a href="#">
-                                        <h4>Digital Marketer</h4>
-                                    </a>
-                                    <ul>
-                                        <li>Creative Agency</li>
-                                        <li><i class="fas fa-map-marker-alt"></i>Athens, Greece</li>
-                                        <li>$3500 - $4000</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- job single End -->
 
                         <div class="job-post-details">
                             <div class="post-details1 mb-50">
@@ -137,7 +129,7 @@
                                 <div class="small-section-tittle">
                                     <h4>Job Description</h4>
                                 </div>
-                                <p>It is a long established fact that a reader will beff distracted by vbthe creadable content of a page when looking at its layout. The pointf of using Lorem Ipsum is that it has ahf mcore or-lgess normal distribution of letters, as opposed to using, Content here content here making it look like readable.</p>
+                                <p><?php  ?></p>
                             </div>
                             <div class="post-details2  mb-50">
                                 <!-- Small Section Tittle -->
