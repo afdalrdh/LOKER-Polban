@@ -76,6 +76,7 @@ if (isset($_POST['logout'])) {
                                         <ul id="navigation">
                                             <li><a href="#">Beranda</a></li>
                                             <li><a href="buat_loker.php">Buat Loker</a></li>
+                                            <li><a href="loker_saya.php">Loker Saya</a></li>
                                             <li><a href="about.php">Tentang Kami</a></li>
                                         </ul>
                                     </nav>
@@ -150,17 +151,6 @@ if (isset($_POST['logout'])) {
                                 require 'config.php';
                                 $Loker = $loker->find();
                                 foreach ($Loker as $lkr) {
-                                    // echo "<tr>";
-                                    // echo "<th scope='row'>" . $mhs->NIM . "</th>";
-                                    // echo "<td>" . $mhs->Nama . "</td>";
-                                    // echo "<td>" . $mhs->Prodi . "</td>";
-                                    // echo "<td>" . $mhs->Alamat . "</td>";
-                                    // echo "<td>";
-                                    // echo "<a href = 'edit.php?id=" . $mhs->_id . "'class='btn btn-primary'>EDIT</a>";
-                                    // echo "<a href = 'hapus.php?id=" . $mhs->_id . "'class='btn btn-danger'>HAPUS</a>";
-                                    // echo "</td>";
-                                    // echo "</tr>";
-
                                 ?>
                                     <div class="single-job-items mb-30">
                                         <div class="job-items">
@@ -178,7 +168,7 @@ if (isset($_POST['logout'])) {
                                             </div>
                                         </div>
                                         <div class="items-link items-link2 f-right">
-                                            <a href="detail_loker.php">Detail</a>
+                                            <a href="detail_loker.php?id='<?php echo $lkr->_id ?>'">Detail</a>
                                             <span><?php echo "$lkr->tgl_berakhir" ?></span>
                                         </div>
                                     </div>

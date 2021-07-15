@@ -36,21 +36,19 @@
         $temp  = $_POST['pass'];
         $options = array('cost' => 10);
         $pass = password_hash($temp, PASSWORD_BCRYPT, $options);
-        $status = false;
-
+    
         $arrays = array(
             
-            "nama"          => $name,
-            "type"          => $pekerjaan,
-            "nomor_induk"   => $nomor_induk,
-            "prodi"         => $prodi,
-            "gender"        => $gender,
-            "tgl_lahir"     => $tgl_lahir,
-            "alamat"        => $alamat,
-            "no_tlp"        => $no_telp,
-            "email"         => $email,
-            "password"      => $pass,
-            "status"        => $status
+            "Full Name"     => $name,
+            "Pekerjaan"     => $pekerjaan,
+            "Nomor Induk"   => $nomor_induk,
+            "Program Studi" => $prodi,
+            "Jenis Kelamin" => $gender,
+            "Tanggal Lahir" => $tgl_lahir,
+            "Alamat"        => $alamat,
+            "Nomor Telepon" => $no_telp,
+            "Email Address" => $email,
+            "Password"      => $pass
         
         );
         

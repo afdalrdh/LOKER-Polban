@@ -74,14 +74,20 @@ if (chkLogin()) {
         <!-- Header End -->
     </header>
 
-    <div class="container">
+    <div class="container mb-150">
+        <div class="col-lg-12 mt-30">
+            <div class="section-tittle text-center">
+                <span>Loker Polban</span>
+                <h2>Login</h2>
+            </div>
+        </div>
         <form class="form-horizontal" method="post" action="login_action.php">
             <div class="form-group">
-                <label class="sr-only" for="exampleInputEmail3">Email address</label>
+                <label>Email address</label>
                 <input type="email" class="form-control" id="exampleInputEmail3" name="email" placeholder="Email" required>
             </div>
-            <div class="form-group">
-                <label class="sr-only" for="exampleInputPassword3">Password</label>
+            <div class="form-group mb-30">
+                <label>Password</label>
                 <input type="password" class="form-control" id="exampleInputPassword3" name="pass" placeholder="Password" required>
             </div>
             <button type="submit" name="login" class="btn btn-default">Sign in</button>
