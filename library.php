@@ -1,4 +1,5 @@
 <?php
+require_once 'config.php';
     
     function register($document){
         global $user;
@@ -7,7 +8,7 @@
     }
 
     function chkemail($email){
-        global $user;
+        $user = (new MongoDB\Client)->db_tubes_loker->user;
         $temp = $user->findOne(array('email'=> $email));
         if(empty($temp)){
         return true;
@@ -16,6 +17,18 @@
             return false;
         }
     }
+
+    function chkAdmin($email){
+        $admin = (new MongoDB\Client)->db_tubes_loker->admin;
+        $temp = $admin->findOne(array('email'=> $email));
+        if(empty($temp)){
+        return true;
+        }
+        else{
+            return false;
+        }
+    }
+
     function setsession($email){
      
         $_SESSION["userLoggedIn"] = 1;

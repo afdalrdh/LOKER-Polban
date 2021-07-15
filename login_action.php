@@ -12,7 +12,9 @@
 //        print_r($_POST);
     $email = $_POST['email'];
     $upass = $_POST['pass'];
-    if($email == "admin@admin" && $upass == "admin"){
+    $criteria = array("email"=> $email);
+    $temp = $admin->findOne($criteria);
+    if(!empty($temp)){
         header("Location: admin/dashboard.php");
     }else{
 
@@ -24,9 +26,9 @@
             echo "Either <a href='register.php'>Register</a> with the new Email ID or <a href='index.php'>Login</a> with an already registered ID";
         }
         else{
-            
+                $sts = $query["status"];
                 $pass = $query["password"];
-                if(password_verify($upass,$pass)){
+                if(password_verify($upass,$pass) && $sts == true){
                     $var = setsession($email);
 //                    echo"<pre>";   
 //                    print_r($_SESSION);
@@ -41,7 +43,7 @@
                     }
                 }
                 else{
-                    echo "You have entered a wrong password";
+                    echo "You have entered a wrong password or your account status is pending";
                     echo "<br>";
                     echo "Either <a href='register.php'>Register</a> with the new Email ID or <a href='index.php'>Login</a> with an already registered ID";
                 }

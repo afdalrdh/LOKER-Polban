@@ -176,37 +176,26 @@ session_start();
                                 <table class="table table-striped table-bordered table-hover" id="dataTabel-akun">
                                     <thead class="thead-dark">
                                         <tr>
-                                            <th scope="col">Nomor Induk</th>
-                                            <th scope="col">Tipe</th>
                                             <th scope="col">Email</th>
                                             <th scope="col">Nama</th>
-                                            <th scope="col">Program Studi</th>
-                                            <th scope="col">Status</th>
+                                            <th scope="col">Alamat</th>
+                                            <th scope="col">No Telepon</th>
                                             <th scope="col">Aksi</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <?php
                                         require($_SERVER['DOCUMENT_ROOT'] . '/loker-Polban/config.php');
-                                        $user = $user->find();
-                                        foreach ($user as $usr) :
-                                            if ($usr->status == false) {
-                                                $usr->status = "Pending";
-                                            } else {
-                                                $usr->status = "Disetujui";
-                                            }
-                                        
+                                        $admin = $admin->find();
+                                        foreach ($admin as $adm) :
                                         ?>
-                                        <tr>
-                                        <td><?php echo $usr->nomor_induk ?></td>
-                                        <td><?php echo $usr->type ?></td>
-                                        <td><?php echo $usr->email ?></td>
-                                        <td><?php echo $usr->nama ?></td>
-                                        <td><?php echo $usr->prodi ?></td>
-                                        <td><?php echo $usr->status ?></td>
-                                        <td><a href="setujui_akun.php" id="<?php $usr->_id ?>"class='btn btn-primary'>SETUJUI</a>
-                                        <a href="hapus_akun.php" id="<?php $usr->_id ?>"class='btn btn-danger'>HAPUS</a></td>
-                                        </tr>
+                                            <tr>
+                                                <td><?php echo $adm->email ?></td>
+                                                <td><?php echo $adm->nama ?></td>
+                                                <td><?php echo $adm->alamat ?></td>
+                                                <td><?php echo $adm->no_tlp ?></td>
+                                                <td><a href="hapus_admin.php" id="<?php $usr->_id ?>" class='btn btn-danger'>HAPUS</a></td>
+                                            </tr>
                                         <?php endforeach; ?>
                                     </tbody>
                                 </table>

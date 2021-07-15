@@ -1,5 +1,5 @@
 <?php
-require ($_SERVER['DOCUMENT_ROOT'].'/loker-Polban/library.php');
+require($_SERVER['DOCUMENT_ROOT'] . '/loker-Polban/library.php');
 session_start();
 ?>
 
@@ -146,6 +146,9 @@ session_start();
                         <li>
                             <a href="#"><i class="fa fa-table fa-fw"></i> Data Loker</a>
                         </li>
+                        <li>
+                            <a href="data_admin.php"><i class="fa fa-table fa-fw"></i> Data Admin</a>
+                        </li>
                     </ul>
                 </div>
                 <!-- /.sidebar-collapse -->
@@ -170,7 +173,7 @@ session_start();
                         <!-- /.panel-heading -->
                         <div class="panel-body">
                             <div class="dataTable_wrapper">
-                                <table class="table">
+                                <table class="table table-striped table-bordered table-hover" id="dataTabel-loker">
                                     <thead class="thead-dark">
                                         <tr>
                                             <th scope="col">Pemilik</th>
@@ -178,30 +181,32 @@ session_start();
                                             <th scope="col">Jenis</th>
                                             <th scope="col">Tipe</th>
                                             <th scope="col">Status</th>
+                                            <th scope="col">Aksi</th>
                                         </tr>
                                     </thead>
-                                    <?php
-                                    require ($_SERVER['DOCUMENT_ROOT'].'/loker-Polban/config.php');
-                                    $loker = $loker->find();
-                                    foreach ($loker as $lkr) {
-                                        if($lkr->status==false){
-                                            $lkr->status = "Pending";
-                                        }else{
-                                            $lkr->status = "Disetujui";
-                                        }
-                                        echo "<tr>";
-                                        echo "<th scope='row'>" . $lkr->pemilik . "</th>";
-                                        echo "<td>" . $lkr->judul_loker . "</td>";
-                                        echo "<td>" . $lkr->jenis_loker . "</td>";
-                                        echo "<td>" . $lkr->type . "</td>";
-                                        echo "<td>" . $lkr->status . "</td>";
-                                        echo "<td>";
-                                        echo "<a href='setujui_loker.php?id=" . $lkr->_id . "'class='btn btn-primary'>SETUJUI</a>";
-                                        echo "<a href='hapus_loker.php?id=" . $lkr->_id . "'class='btn btn-danger'>HAPUS</a>";
-                                        echo "</td>";
-                                        echo "</tr>";
-                                    }
-                                    ?>
+                                    <tbody>
+                                        <?php
+                                        require($_SERVER['DOCUMENT_ROOT'] . '/loker-Polban/config.php');
+                                        $loker = $loker->find();
+                                        foreach ($loker as $lkr) :
+                                            if ($lkr->status == false) {
+                                                $lkr->status = "Pending";
+                                            } else {
+                                                $lkr->status = "Disetujui";
+                                            }
+                                        ?>
+                                            <tr>
+                                                <td><?php echo $lkr->pemilik ?></td>
+                                                <td><?php echo $lkr->judul_loker ?></td>
+                                                <td><?php echo $lkr->jenis_loker ?></td>
+                                                <td><?php echo $lkr->type ?></td>
+                                                <td><?php echo $lkr->status ?></td>
+                                                <td><a href="setujui_loker.php" id="<?php $usr->_id ?>" class='btn btn-primary'>SETUJUI</a>
+                                                    <a href="hapus_loker.php" id="<?php $usr->_id ?>" class='btn btn-danger'>HAPUS</a>
+                                                </td>
+                                            </tr>
+                                        <?php endforeach; ?>
+                                    </tbody>
                                 </table>
                             </div>
                         </div>
@@ -239,7 +244,7 @@ session_start();
     <!-- Page-Level Demo Scripts - Tables - Use for reference -->
     <script>
         $(document).ready(function() {
-            $($user).DataTable({
+            $('#dataTabel-loker').DataTable({
                 responsive: true
             });
         });

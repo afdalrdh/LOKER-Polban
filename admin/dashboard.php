@@ -159,6 +159,9 @@ $lokerUnVerify = $loker->count(array('status' => false));
                         <li>
                             <a href="data_loker.php"><i class="fa fa-table fa-fw"></i> Data Loker</a>
                         </li>
+                        <li>
+                            <a href="data_admin.php"><i class="fa fa-table fa-fw"></i> Data Admin</a>
+                        </li>
                     </ul>
                 </div>
             </div>
